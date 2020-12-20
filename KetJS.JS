@@ -123,7 +123,7 @@
       for (i = 5; i < number; i++){ output = "++[" + output + "][+[]]"; }
     MAPPING[number] = "[" + output + "]";
     }
-    MAPPING[9] = "[" + MAPPING[3].slice/(1,-1) + "/(++[[]][+[]]/" + MAPPING[3] +")" //9=3*3=3/(1/3)
+    MAPPING[9] = "[" + MAPPING[3].slice(1,-1) + "/(++[[]][+[]]/" + MAPPING[3].slice(1,-1) +")" //9=3*3=3/(1/3)
   }
 
   function replaceMap(){
@@ -141,12 +141,7 @@
     function numberReplacer(_,y) {
       var values = y.split("");
       var head = +(values.shift());
-      var output = "+[]";
-
-      if (head > 0){ output = "+!" + output; }
-      for (i = 1; i < head; i++){ output = "+!+[]" + output; }
-      if (head > 1){ output = output.substr(1); }
-
+      var output = MAPPING[head].slice(1,-1)
       return [output].concat(values).join("+").replace(/(\d)/g, digitReplacer);
     }
 
