@@ -32,10 +32,10 @@
     'l':   '(/]/["unicode"]+"")[2]',
     'm':   '(Number+"")[11]',
     'n':   '(undefined+"")[1]',
-    'o':   '(true+[]["find"])[10]',
+    'o':   '(/]]/+[]["find"])[10]',
     'p':   null //'(+(211))["to"+String["name"]](31)[1]',
-    'q':   '("")["fontcolor"]([0]+false+")[20]',
-    'r':   '((/]/+"")["includes"](/]/+"")+"")[1]',
+    'q':   '("")["fontcolor"](/]]]]/+")[20]',
+    'r':   '(("")["includes"]([])+"")[1]',
     's':   '(/]]]]]/+/]/["unicode"])[10]',
     't':   '(/]]/+Infinity)[10]',
     'u':   '(undefined+"")[0]',
@@ -112,16 +112,18 @@
   function fillMissingDigits(){
     var output, number, i;
 
-    for (number = 0; number < 10; number++){
-
+    for (number = 0; number < 5; number++){
       output = "+[]";
-
-      if (number > 0){ output = "+!" + output; }
-      for (i = 1; i < number; i++){ output = "+!+[]" + output; }
-      if (number > 1){ output = output.substr(1); }
-
+      if (number > 0){ output = "++[[]][" + output + "]"; }
+      for (i = 1; i < number; i++){ output = "++[" + output + "][+[]]"; }
       MAPPING[number] = "[" + output + "]";
     }
+    for (number = 5; number < 9; number++){
+      output = "(++[[]][+[]]+[+[]])/++[++[[]][+[]]][+[]]"; //5=10/2
+      for (i = 5; i < number; i++){ output = "++[" + output + "][+[]]"; }
+    MAPPING[number] = "[" + output + "]";
+    }
+    MAPPING[9] = "[" + MAPPING[3].slice/(1,-1) + "/(++[[]][+[]]/" + MAPPING[3] +")" //9=3*3=3/(1/3)
   }
 
   function replaceMap(){
